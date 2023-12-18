@@ -7,8 +7,10 @@
     <div class="menu_left-navbar">
         <div class="energy">
             <div class="close_top" style="background-color: rgb(241, 241, 241);"><i class='bx bx-x'></i></div>
-            <div class="shopping_top" style="margin-left: 17rem;"><i class='bx bx-shopping-bag'></i><span>1</span></div>
-            <div class="heart_top"><i class='bx bx-heart'></i><span>1</span></div>
+            <div class="shopping_top" style="margin-left: 17rem;"><i class='bx bx-shopping-bag'></i> <span>
+                    <?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : '0' ?>
+                </span></div>
+            <div class="heart_top"><i class='bx bx-heart'></i><span>0</span></div>
             <div class="refresh_top"><i class='bx bx-refresh'></i><span>0</span></div>
         </div>
         <div class="menu_top-ship-free z-[10] bg-white px-[1.5rem] py-0">
@@ -42,8 +44,7 @@
                     <?php foreach ($_SESSION['cart'] as $orderItems) { ?>
                         <div class="my_cart flex justify-between py-[0.5rem] items-center">
                             <div class="flex gap-[10px]">
-                                <img src="./public/img/product/<?php echo $orderItems["productId"] ?>.webp" alt=""
-                                    class="w-[80px]">
+                                <img src="./public/img/product/<?php echo $orderItems["productId"] ?>.webp" alt="" class="w-[80px]">
                                 <div class="card_heart-name_product flex flex-col justify-center">
                                     <span>
                                         <?php echo $orderItems['productName']; ?>
@@ -61,8 +62,7 @@
                             <form action="cart.php" method="post">
                                 <input type="hidden" name="_method" value="delete">
                                 <input type="hidden" name="idRemove" value="<?php echo $orderItems["productId"] ?>">
-                                <button><i class='remove_cart bx bx-trash cursor-pointer text-black'
-                                        style="font-size: 15px;"></i></button>
+                                <button><i class='remove_cart bx bx-trash cursor-pointer text-black' style="font-size: 15px;"></i></button>
                             </form>
                         </div>
                     <?php } ?>
@@ -99,8 +99,7 @@
 
 <div class="reponsive_menu">
     <div class="oppenMenu"><i class='bx bx-menu' style="padding-left: 1rem;"></i></div>
-    <div class="name_shop" style="position: absolute; left: 50%; transform: translateX(-50%);"><a
-            href="index.php">BAMAN</a></div>
+    <div class="name_shop" style="position: absolute; left: 50%; transform: translateX(-50%);"><a href="index.php">BAMAN</a></div>
     <div class=""><i class='bx bx-shopping-bag'></i></div>
 </div>
 <div class="container_menu">
@@ -249,8 +248,7 @@
             </li>
             <li><a href="#">MEGA<i class='bx bx-chevron-down'></i></a></li>
         </div>
-        <div class="name_shop" style="position: absolute; left: 50%; transform: translateX(-50%);"><a
-                href="index.php">BAMAN</a></div>
+        <div class="name_shop" style="position: absolute; left: 50%; transform: translateX(-50%);"><a href="index.php">BAMAN</a></div>
         <div class="energy">
             <div class="search"><i class='bx bx-search' style="padding-right: 1rem;"></i></div>
             <div class="shopping"><i class='bx bx-shopping-bag'></i>
@@ -264,8 +262,7 @@
                 <div class="user is_login relative">
                     <i class='bx bx-user'></i>
                     <div class="account_user hidden">
-                        <ul
-                            class="absolute z-10 w-[200px] px-[0.8rem] py-[0.3rem] text-[13px] flex flex-col justify-center bg-white top-[7px] left-[-150px]">
+                        <ul class="absolute z-10 w-[200px] px-[0.8rem] py-[0.3rem] text-[13px] flex flex-col justify-center bg-white top-[7px] left-[-150px]">
                             <li class="p-0 mt-[5px] flex justify-center">
                                 <?php echo $_SESSION['email'] ?>
                             </li>
@@ -273,8 +270,7 @@
                                 <li class="p-0 mt-[5px] flex items-center gap-[5px]"><i class='bx bx-user'></i>Account</li>
                             </a>
                             <a href="logout.php">
-                                <li class="p-0 mt-[5px] flex items-center gap-[5px]"><i
-                                        class='bx bx-log-out bx-rotate-180'></i>Log out</li>
+                                <li class="p-0 mt-[5px] flex items-center gap-[5px]"><i class='bx bx-log-out bx-rotate-180'></i>Log out</li>
                             </a>
                         </ul>
                     </div>
@@ -284,8 +280,7 @@
                     <div class="user is_login relative">
                         <i class='bx bx-user'></i>
                         <div class="account_user hidden">
-                            <ul
-                                class="absolute z-10 w-[200px] px-[0.8rem] py-[0.3rem] text-[13px] flex flex-col justify-center bg-white top-[7px] left-[-150px]">
+                            <ul class="absolute z-10 w-[200px] px-[0.8rem] py-[0.3rem] text-[13px] flex flex-col justify-center bg-white top-[7px] left-[-150px]">
                                 <li class="p-0 mt-[5px] flex justify-center">
                                     <?php echo $_SESSION['email'] ?>
                                 </li>
@@ -297,8 +292,7 @@
                                     </li>
                                 </a>
                                 <a href="logout.php">
-                                    <li class="p-0 mt-[5px] flex items-center gap-[5px]"><i
-                                            class='bx bx-log-out bx-rotate-180'></i>Log out</li>
+                                    <li class="p-0 mt-[5px] flex items-center gap-[5px]"><i class='bx bx-log-out bx-rotate-180'></i>Log out</li>
                                 </a>
                             </ul>
                         </div>
