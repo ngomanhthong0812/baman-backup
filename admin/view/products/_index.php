@@ -42,7 +42,7 @@
                                         <th>Description</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
-                                        <th>Category_id</th>
+                                        <th>Category</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -55,7 +55,7 @@
                                         <th>Name</th>
                                         <th>Description</th>
                                         <th>Price</th>
-                                        <th>Category_id</th>
+                                        <th>Category</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -85,7 +85,7 @@
                                                 <?php echo $product['quantity']; ?>
                                             </td>
                                             <td>
-                                                <?php echo $product['category_id']; ?>
+                                                <?php echo get_category($product['category_id'])['name']; ?>
                                             </td>
                                             <td>
                                                 <a class="btn btn-primary"

@@ -36,34 +36,31 @@
                                 <input type="hidden" name="id" />
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Code</label>
-                                    <input type="text" name="code"
-                                        class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                        placeholder="">
+                                    <input type="text" name="code" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Status</label>
-                                    <input type="text" name="status"
-                                        class="form-control" id="exampleInputPassword1" placeholder="">
+                                    <input type="text" name="status" class="form-control" id="exampleInputPassword1" placeholder="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Users_id</label>
-                                    <input type="text" name="users_id"
-                                        class="form-control" id="exampleInputPassword1" placeholder="">
+                                    <label for="exampleInputPassword1">Users</label>
+                                    <select class="form-control" name="users_id">
+                                        <?php foreach ($userName as $user) { ?>
+                                            <option value="<?php echo $user['name'] ?>"><?php echo $user['name'] ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Address</label>
-                                    <input type="text" name="address"
-                                        class="form-control" id="exampleInputPassword1" placeholder="">
+                                    <input type="text" name="address" class="form-control" id="exampleInputPassword1" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Phone</label>
-                                    <input type="text" name="phone"
-                                        class="form-control" id="exampleInputPassword1" placeholder="">
+                                    <input type="text" name="phone" class="form-control" id="exampleInputPassword1" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">date</label>
-                                    <input type="text" name="date"
-                                        class="form-control" id="exampleInputPassword1" placeholder="">
+                                    <input type="text" name="date" class="form-control" id="exampleInputPassword1" placeholder="">
                                 </div>
                                 <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Submit</button>
                             </form>

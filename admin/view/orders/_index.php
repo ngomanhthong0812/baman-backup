@@ -39,7 +39,7 @@
                                         <th>ID</th>
                                         <th>Code</th>
                                         <th>Status</th>
-                                        <th>User_is</th>
+                                        <th>User</th>
                                         <th>Address</th>
                                         <th>Phone</th>
                                         <th>Date</th>
@@ -53,7 +53,7 @@
                                         <th>ID</th>
                                         <th>Code</th>
                                         <th>Status</th>
-                                        <th>User_is</th>
+                                        <th>User</th>
                                         <th>Address</th>
                                         <th>Phone</th>
                                         <th>Date</th>
@@ -78,7 +78,7 @@
                                                 <?php echo $order['status']; ?>
                                             </td>
                                             <td>
-                                                <?php echo $order['users_id']; ?>
+                                                <?php echo get_user($order['users_id'])['name']; ?>
                                             </td>
                                             <td>
                                                 <?php echo $order['address']; ?>

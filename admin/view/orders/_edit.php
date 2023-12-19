@@ -43,8 +43,12 @@
                                     <input type="text" name="status" value="<?php echo $order['status']; ?>"  class="form-control" id="exampleInputPassword1" placeholder="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Users_id</label>
-                                    <input type="text" name="users_id" value="<?php echo $order['users_id']; ?>"  class="form-control" id="exampleInputPassword1" placeholder="">
+                                    <label for="exampleInputPassword1">Users</label>
+                                    <select class="form-control" name="users_id">
+                                        <?php foreach ($userName as $user) { ?>
+                                            <option <?php if($user['id'] == $order['id']){echo 'selected'; } ?> value="<?php echo $user['name'] ?>"><?php echo $user['name'] ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Address</label>

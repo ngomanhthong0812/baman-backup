@@ -40,23 +40,28 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Image</label>
-                                    <input type="text" name="image" value="<?php echo $product['image']; ?>"  class="form-control" id="exampleInputPassword1" placeholder="Image">
+                                    <input type="text" name="image" value="<?php echo $product['image']; ?>" class="form-control" id="exampleInputPassword1" placeholder="Image">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Description</label>
-                                    <input type="text" name="description" value="<?php echo $product['description']; ?>"  class="form-control" id="exampleInputPassword1" placeholder="Description">
+                                    <input type="text" name="description" value="<?php echo $product['description']; ?>" class="form-control" id="exampleInputPassword1" placeholder="Description">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Price</label>
-                                    <input type="text" name="price" value="<?php echo $product['price']; ?>"  class="form-control" id="exampleInputPassword1" placeholder="Price">
+                                    <input type="text" name="price" value="<?php echo $product['price']; ?>" class="form-control" id="exampleInputPassword1" placeholder="Price">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Quantity</label>
-                                    <input type="text" name="quantity" value="<?php echo $product['quantity']; ?>"  class="form-control" id="exampleInputPassword1" placeholder="Quantity">
+                                    <input type="text" name="quantity" value="<?php echo $product['quantity']; ?>" class="form-control" id="exampleInputPassword1" placeholder="Quantity">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Category_id</label>
-                                    <input type="text" name="category_id" value="<?php echo $product['category_id']; ?>"  class="form-control" id="exampleInputPassword1" placeholder="Category_id">
+                                    <label for="exampleInputPassword1">Category</label>
+                                    <select class="form-control" name="category_id">
+                                        <?php foreach ($categoryList as $cat) { ?>
+                                            <option <?php if($product['category_id'] == $cat['id']) echo 'selected'; ?> value="<?php echo $cat['name']?>"><?php echo $cat['name'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <!-- <input type="text" name="category_id" class="form-control" id="exampleInputPassword1" placeholder=""> -->
                                 </div>
                                 <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Submit</button>
                             </form>

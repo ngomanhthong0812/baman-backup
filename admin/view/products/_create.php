@@ -32,7 +32,7 @@
                             DataTable Example
                         </div>
                         <div class="card-body">
-                        <form action="create.php" method="post">
+                            <form action="create.php" method="post">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Name</label>
                                     <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
@@ -47,15 +47,19 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Price</label>
-                                    <input type="text" name="price"  class="form-control" id="exampleInputPassword1" placeholder="">
+                                    <input type="text" name="price" class="form-control" id="exampleInputPassword1" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Quantity</label>
                                     <input type="text" name="quantity" class="form-control" id="exampleInputPassword1" placeholder="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Category_id</label>
-                                    <input type="text" name="category_id" class="form-control" id="exampleInputPassword1" placeholder="">
+                                    <label for="exampleInputPassword1">Category</label>
+                                    <select class="form-control" name="category_id">
+                                        <?php foreach($nameCategory as $name){?>
+                                        <option value="<?php echo $name['name']?>"><?php echo $name['name']?></option>
+                                        <?php }?>
+                                    </select>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Submit</button>
