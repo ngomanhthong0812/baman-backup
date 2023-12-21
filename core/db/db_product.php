@@ -35,6 +35,70 @@ function get_all_products()
     return $productList;
 }
 
+function get_products_by_page($page)
+{
+    global $pdo;
+
+    $perPage = 8;
+    $begin = ($page - 1) * $perPage;
+
+    $sql = "SELECT PRODUCTS.*, CATEGORIES.NAME AS category_name
+    FROM PRODUCTS
+    LEFT JOIN CATEGORIES ON PRODUCTS.category_id = CATEGORIES.id LIMIT $begin, $perPage";
+
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->execute();
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+    // Lấy danh sách kết quả
+    $result = $stmt->fetchAll();
+    $productList = array();
+
+    if (count($result) > 0) {
+        // Hiển thị dữ liệu của bảng
+        foreach ($result as $row) {
+            $product = array(
+                "id" => $row["id"],
+                "image" => $row["image"],
+                "name" => $row["name"],
+                "description" => $row["description"],
+                "price" => $row["price"],
+                "quantity" => $row["quantity"],
+                "category_name" => $row["category_name"]
+            );
+            array_push($productList, $product);
+        }
+    }
+
+    return $productList;
+}
+
+function get_products_by_price($price)
+{
+    global $pdo;
+
+    $sql = "SELECT * FROM PRODUCTS WHERE PRICE >= :minPrice AND PRICE <= :maxPrice";
+
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->bindParam(':minPrice', $price['minPrice']);
+    $stmt->bindParam(':maxPrice', $price['maxPrice']);
+
+    $stmt->execute();
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+    // Lấy danh sách kết quả
+    $result = $stmt->fetchAll();
+    // Lặp kết quả và xây dựng mảng tên sản phẩm
+    $price = array();
+    foreach ($result as $row) {
+        $price[] = $row['price'];
+    }
+
+    return $price;
+}
+
 function delete_product($product_id)
 {
     global $pdo;
@@ -155,7 +219,6 @@ function update_product_quantity_by_id($product)
     $stmt->bindParam(':quantity', $updateQuantity);
 
     $stmt->execute();
-
 }
 
 // lấy ra sản phẩm bao gôm cả tên loại của bảng category
@@ -194,4 +257,3 @@ function get_all_products_category()
 
     return $productList;
 }
-

@@ -11,6 +11,9 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./public/css/output.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- thêm thư viện noUiSlider -->
+    <link href="https://cdn.jsdelivr.net/npm/nouislider/distribute/nouislider.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/nouislider"></script>
 </head>
 
 <body>
@@ -47,9 +50,15 @@
                     <span class="flex justify-between items-center text-[15px] font-[500]">
                         <p>Filter By Price</p><button class="w-[20px] h-[20px] rounded-full bg-[#f5f5f5] text-[16px] flex items-center justify-center font-bold">-</button>
                     </span>
-                    <input type="range" class="w-[100%] mt-[1rem]">
-                    <span class="flex justify-between items-center text-[12px] mt-[1rem] text-[#7d7d7d] font-[420]"><button class="bg-black text-white py-[0.4rem] px-3">FILTER</button><span>PRICE: $10 -
-                            $240</span></span>
+                    <!-- <input type="range" class="w-[100%] mt-[1rem]"> -->
+                    <div id="slider" class="w-[100%] mt-[1rem]"></div>
+                    <form action="category.php" method="get" class="flex justify-between items-center text-[12px] mt-[1rem] text-[#7d7d7d] font-[420]">
+                        <button class="bg-black text-white py-[0.4rem] px-3">FILTER</button>
+                        <input type="hidden" name="minPrice" id="minPriceData" value="">
+                        <input type="hidden" name="maxPrice" id="maxPriceData" value="">
+                        <span class="flex items-center justify-center">PRICE: $<div id="minPrice"></div> - $ <div id="maxPrice"></div></span>
+                    </form>
+
                 </div>
                 <div class="mt-[2rem]">
                     <span class="flex justify-between items-center text-[15px] font-[500]">
@@ -57,7 +66,7 @@
                     </span>
                     <span class="flex justify-between items-center text-[12px] font-[400] mt-[1rem]">
                         <button type="black" class="btnType text-[#7d7d7d] flex items-center gap-[10px] cursor-pointer">
-                        <div class="w-[11px] h-[11px] rounded-full bg-black border"></div>Black
+                            <div class="w-[11px] h-[11px] rounded-full bg-black border"></div>Black
                         </button>
                         <div class="w-[20px] h-[20px] rounded-full text-[11px] flex items-center justify-center">3</div>
                     </span>
@@ -215,15 +224,9 @@
                 </div>
                 <!-- start lọc 1 -->
                 <div class="relative container_filter-1">
-                    <div class="spinner_1 top-[-1rem]">
-                        <div class="rect1"></div>
-                        <div class="rect2"></div>
-                        <div class="rect3"></div>
-                        <div class="rect4"></div>
-                        <div class="rect5"></div>
-                    </div>
                     <div class="product_card product_card1 grid-cols-2 w-[100%] filter-1 px-0 py-[2rem]">
                         <?php foreach ($productList as $product) { ?>
+                            <?php if(in_array(intval($product['price']),$productPriceFilter)){?>
                             <a href="detail.php?product_id=<?php echo $product['id']; ?>" type="<?php echo $product['category_name'] ?>" class="my_card w-[100%] flex gap-[20px] border p-[1.2rem] rounded-[10px] shadow-sm">
                                 <div class="image w-[300px] h-[180px] border rounded-[5px]">
                                     <img src="./public/img/product/<?php echo $product['image']; ?>.webp" alt="" class="w-[100px]">
@@ -258,6 +261,7 @@
                                 </div>
                             </a>
                         <?php } ?>
+                        <?php } ?>
                     </div>
                     <!-- end lọc 1 -->
 
@@ -286,8 +290,29 @@
                 </div>
                 <!-- end lọc 2,3,4 -->
 
-
-                <div class="w-[100%] flex justify-center p-[2rem] container_load_more"><button class="load_more bg-black text-white px-[2.5rem] py-[0.5rem] text-[13px] hover:opacity-[0.7] duration-200 ease-in-out" onclick="load_more()">Load More</button></div>
+                <div class="page flex m-[auto] w-[fit-content] p-[0.3rem] gap-[5px] rounded-[3px] bg-black items-center justify-center text-[16px]">
+                    <form method="get" action="category.php">
+                        <input type="hidden" name="page" value="1">
+                        <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&lt;&lt;">
+                    </form>
+                    <form method="get" action="category.php">
+                        <input type="hidden" name="page" value="<?php echo $page > 1 ? $page - 1 : 1 ?>">
+                        <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&lt;">
+                    </form>
+                    <form method="get" action="category.php" class="flex gap-[5px]">
+                        <?php for ($i = 1; $i <= $pageNumber; $i++) { ?>
+                            <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center text-center cursor-pointer  duration-300 ease-in-out <?php echo $page == $i ? " bg-white text-black" : " bg-[black] text-[white] hover:bg-white hover:text-black"; ?>" name="page" value="<?php echo $i ?>">
+                        <?php } ?>
+                    </form>
+                    <form method="get" action="category.php">
+                        <input type="hidden" name="page" value="<?php echo $page < $pageNumber ? $page + 1 : $pageNumber ?>">
+                        <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&gt;">
+                    </form>
+                    <form method="get" action="category.php">
+                        <input type="hidden" name="page" value="<?php echo $pageNumber ?>">
+                        <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&gt;&gt;">
+                    </form>
+                </div>
 
 
             </div>
@@ -300,7 +325,6 @@
 
     <script src="./public/js/product_detail.js"></script>
     <script>
-        
         var menu = document.querySelector(".container_menu");
         var myBody = document.querySelector(".container_categories");
 

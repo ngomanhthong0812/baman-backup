@@ -277,8 +277,6 @@ try {
 // filter
 var productFilter1 = document.querySelectorAll(".filter-1 .my_card");
 var productFilter2 = document.querySelectorAll(".filter-2 .my_card");
-var loadMore = document.querySelector(".load_more");
-var containerLoadMore = document.querySelector(".container_load_more");
 var spinnerContainer = document.querySelector(".container_filter-1");
 var spinner = document.querySelector(".container_filter-1 .spinner_1");
 let indexProductLength = productFilter1.length;
@@ -297,12 +295,10 @@ window.addEventListener('load', function () {
 
 
 function load_more() {
-  loadMore.innerHTML = "Loading . . .";
   setTimeout(function () {
     for (var i = 8; i < productFilter1.length; i++) {
       productFilter1[i].style.display = "flex";
       productFilter2[i].style.display = "block";
-      containerLoadMore.style.display = "none";
     }
   }, 1000);
 }
@@ -320,11 +316,6 @@ function filter(number) {
     val_2.style.color = "#7d7d7d";
     val_3.style.color = "#7d7d7d";
     val_4.style.color = "#7d7d7d";
-    containerLoadMore.style.display = "none";
-    loadMore.innerHTML = "Load More";
-    if (indexProductLength > 8) {
-      containerLoadMore.style.display = "flex";
-    }
   }
   if (number == 2) {
     filter_2.style.display = "grid";
@@ -337,11 +328,6 @@ function filter(number) {
     val_2.style.color = "black";
     val_3.style.color = "#7d7d7d";
     val_4.style.color = "#7d7d7d";
-    containerLoadMore.style.display = "none";
-    loadMore.innerHTML = "Load More";
-    if (indexProductLength > 8) {
-      containerLoadMore.style.display = "flex";
-    }
   }
   if (number == 3) {
     filter_2.style.display = "grid";
@@ -353,11 +339,6 @@ function filter(number) {
     val_2.style.color = "#7d7d7d";
     val_3.style.color = "black";
     val_4.style.color = "#7d7d7d";
-    containerLoadMore.style.display = "none";
-    loadMore.innerHTML = "Load More";
-    if (indexProductLength > 8) {
-      containerLoadMore.style.display = "flex";
-    }
   }
   if (number == 4) {
     filter_2.style.display = "grid";
@@ -370,10 +351,6 @@ function filter(number) {
     val_3.style.color = "#7d7d7d";
     val_4.style.color = "black";
     containerLoadMore.style.display = "none";
-    loadMore.innerHTML = "Load More";
-    if (indexProductLength > 8) {
-      containerLoadMore.style.display = "flex";
-    }
   }
   for (var i = 8; i < productFilter1.length; i++) {
     productFilter1[i].style.display = "none";
@@ -435,7 +412,6 @@ function searchList() {
   const filter_2 = document.querySelectorAll(".filter-2-1");
   const parentCart_1 = document.querySelector(".filter-1-1 .is_search");
   const parentCart_2 = document.querySelector(".filter-2-1 .is_search");
-  var containerLoadMore = document.querySelector(".container_load_more-1");
   filter_1.forEach((oppElement) => {
     const childElements = oppElement.children;
     if (childElements.length == 1) {
@@ -446,11 +422,6 @@ function searchList() {
       parentCart_1.style.display = "none";
       parentCart_1.innerHTML = "";
       parentCart_1.style.padding = "0";
-    }
-    if (childElements.length > 7) {
-      containerLoadMore.style.display = "flex";
-    } else {
-      containerLoadMore.style.display = "none";
     }
   });
   filter_2.forEach((oppElement) => {
@@ -463,11 +434,6 @@ function searchList() {
       parentCart_2.style.display = "none";
       parentCart_2.innerHTML = "";
       parentCart_2.style.padding = "0";
-    }
-    if (childElements.length > 7) {
-      containerLoadMore.style.display = "flex";
-    } else {
-      containerLoadMore.style.display = "none";
     }
   });
 }
@@ -532,7 +498,6 @@ try {
 
 function isLoad() {
   if (indexProductLength < 8) {
-    containerLoadMore.style.display = "none";
     productFilter1 = indexProductLength;
     productFilter2 = indexProductLength;
   }
@@ -572,6 +537,11 @@ function productType() {
         }
       })
       indexProductLength = index;
+      if (indexProductLength < 8) {
+        document.querySelector(".page").classList.add('hidden');
+      } else {
+        document.querySelector(".page").classList.remove('hidden');
+      }
       title.innerHTML = `<span class="title flex">Showing all ` + indexProductLength + ` results <span class="px-[1rem] flex items-center justify-center">Filter: &nbsp<i class='bx bxs-x-circle cursor-pointer hover:font-[600]' onclick="removeFilter()"></i>&nbsp<p class="text-black font-700">` + nameType + `</p></span>   </span>`
       isLoad()
     })
@@ -585,3 +555,30 @@ function removeFilter() {
 }
 
 productType();
+
+
+var slider = document.getElementById('slider');
+var minPriceInput = document.getElementById('minPrice');
+var maxPriceInput = document.getElementById('maxPrice');
+var minPriceDataInput = document.getElementById('minPriceData');
+var maxPriceDataInput = document.getElementById('maxPriceData');
+
+noUiSlider.create(slider, {
+  start: [20, 300],
+  connect: true,
+  range: {
+    'min': 10,
+    'max': 400
+  }
+});
+
+slider.noUiSlider.on('update', function (values, handle) {
+  var min = values[0];
+  var max = values[1];
+
+  // Hiển thị giá trị min và max lấy từ thanh trượt
+  minPriceInput.innerHTML = min;
+  maxPriceInput.innerHTML = max;
+  minPriceDataInput.value = min;
+  maxPriceDataInput.value = max;
+});
