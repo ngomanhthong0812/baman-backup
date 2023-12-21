@@ -99,6 +99,46 @@ function get_products_by_price($price)
     return $price;
 }
 
+function get_products_max_price()
+{
+    global $pdo;
+
+    $sql = "SELECT PRICE FROM PRODUCTS ORDER BY PRICE DESC LIMIT 1";
+
+    $stmt = $pdo->prepare($sql);
+
+
+    $stmt->execute();
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+    // Lấy danh sách kết quả
+    $result = $stmt->fetchColumn();
+    // Lặp kết quả và xây dựng mảng tên sản phẩm
+
+
+    return $result;
+}
+
+function get_products_min_price()
+{
+    global $pdo;
+
+    $sql = "SELECT PRICE FROM PRODUCTS ORDER BY PRICE ASC LIMIT 1";
+
+    $stmt = $pdo->prepare($sql);
+
+
+    $stmt->execute();
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+    // Lấy danh sách kết quả
+    $result = $stmt->fetchColumn();
+    // Lặp kết quả và xây dựng mảng tên sản phẩm
+
+
+    return $result;
+}
+
 function delete_product($product_id)
 {
     global $pdo;

@@ -170,7 +170,7 @@
                     </ul>
                 </nav>
                 <div class="container_title_category text-[15px] flex items-center justify-between text-[#7d7d7d]">
-                    <span class="title flex items-center">Showing <?php echo isset($_GET['minPrice']) && isset($_GET['maxPrice']) ? 'all ' . count($productPriceFilter) : '1–8 of 19' ?> results <?php echo isset($_GET['minPrice']) && isset($_GET['maxPrice']) ? '&nbsp;&nbsp; 
+                    <span class="title flex items-center">Showing <?php echo isset($_GET['minPrice']) && isset($_GET['maxPrice']) ? 'all ' : 'all ' . count($productList) . '-19' ?> results <?php echo isset($_GET['minPrice']) && isset($_GET['maxPrice']) ? '&nbsp;&nbsp; 
                     <form action="category.php" method="get">
                     <input type="hidden" name="removePrice">
                     <button class="bx bxs-x-circle cursor-pointer hover:font-[600]"></button> &nbsp;
@@ -299,52 +299,52 @@
                 <!--  lấy số trang -->
 
 
+                
+                
                 <?php $pageNumber = intval((count($productPriceFilter) / 8) + 1); ?>
-                <?php if (count($productPriceFilter) > 7) { ?>
-                    <div class="page flex m-[auto] w-[fit-content] p-[0.3rem] gap-[5px] rounded-[3px] bg-black items-center justify-center text-[16px]">
-                        <form method="get" action="category.php">
-                            <?php if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) { ?>
-                                <input type="hidden" name="minPrice" id="minPriceData" value="<?php echo $_GET['minPrice'] ?>">
-                                <input type="hidden" name="maxPrice" id="maxPriceData" value="<?php echo $_GET['maxPrice'] ?>">
-                            <?php } ?>
-                            <input type="hidden" name="page" value="1">
-                            <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&lt;&lt;">
-                        </form>
-                        <form method="get" action="category.php">
-                            <?php if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) { ?>
-                                <input type="hidden" name="minPrice" id="minPriceData" value="<?php echo $_GET['minPrice'] ?>">
-                                <input type="hidden" name="maxPrice" id="maxPriceData" value="<?php echo $_GET['maxPrice'] ?>">
-                            <?php } ?>
-                            <input type="hidden" name="page" value="<?php echo $page > 1 ? $page - 1 : 1 ?>">
-                            <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&lt;">
-                        </form>
-                        <form method="get" action="category.php" class="flex gap-[5px]">
-                            <?php if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) { ?>
-                                <input type="hidden" name="minPrice" id="minPriceData" value="<?php echo $_GET['minPrice'] ?>">
-                                <input type="hidden" name="maxPrice" id="maxPriceData" value="<?php echo $_GET['maxPrice'] ?>">
-                            <?php } ?>
-                            <?php for ($i = 1; $i <= $pageNumber; $i++) { ?>
-                                <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center text-center cursor-pointer  duration-300 ease-in-out <?php echo $page == $i ? " bg-white text-black" : " bg-[black] text-[white] hover:bg-white hover:text-black"; ?>" name="page" value="<?php echo $i ?>">
-                            <?php } ?>
-                        </form>
-                        <form method="get" action="category.php">
-                            <?php if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) { ?>
-                                <input type="hidden" name="minPrice" id="minPriceData" value="<?php echo $_GET['minPrice'] ?>">
-                                <input type="hidden" name="maxPrice" id="maxPriceData" value="<?php echo $_GET['maxPrice'] ?>">
-                            <?php } ?>
-                            <input type="hidden" name="page" value="<?php echo $page < $pageNumber ? $page + 1 : $pageNumber ?>">
-                            <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&gt;">
-                        </form>
-                        <form method="get" action="category.php">
-                            <?php if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) { ?>
-                                <input type="hidden" name="minPrice" id="minPriceData" value="<?php echo $_GET['minPrice'] ?>">
-                                <input type="hidden" name="maxPrice" id="maxPriceData" value="<?php echo $_GET['maxPrice'] ?>">
-                            <?php } ?>
-                            <input type="hidden" name="page" value="<?php echo $pageNumber ?>">
-                            <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&gt;&gt;">
-                        </form>
-                    </div>
-                <?php } ?>
+                <div class="page flex m-[auto] w-[fit-content] p-[0.3rem] gap-[5px] rounded-[3px] bg-black items-center justify-center text-[16px]">
+                    <form method="get" action="category.php">
+                        <?php if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) { ?>
+                            <input type="hidden" name="minPrice" id="minPriceData" value="<?php echo $_GET['minPrice'] ?>">
+                            <input type="hidden" name="maxPrice" id="maxPriceData" value="<?php echo $_GET['maxPrice'] ?>">
+                        <?php } ?>
+                        <input type="hidden" name="page" value="1">
+                        <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&lt;&lt;">
+                    </form>
+                    <form method="get" action="category.php">
+                        <?php if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) { ?>
+                            <input type="hidden" name="minPrice" id="minPriceData" value="<?php echo $_GET['minPrice'] ?>">
+                            <input type="hidden" name="maxPrice" id="maxPriceData" value="<?php echo $_GET['maxPrice'] ?>">
+                        <?php } ?>
+                        <input type="hidden" name="page" value="<?php echo $page > 1 ? $page - 1 : 1 ?>">
+                        <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&lt;">
+                    </form>
+                    <form method="get" action="category.php" class="flex gap-[5px]">
+                        <?php if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) { ?>
+                            <input type="hidden" name="minPrice" id="minPriceData" value="<?php echo $_GET['minPrice'] ?>">
+                            <input type="hidden" name="maxPrice" id="maxPriceData" value="<?php echo $_GET['maxPrice'] ?>">
+                        <?php } ?>
+                        <?php for ($i = 1; $i <= $pageNumber; $i++) { ?>
+                            <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center text-center cursor-pointer  duration-300 ease-in-out <?php echo $page == $i ? " bg-white text-black" : " bg-[black] text-[white] hover:bg-white hover:text-black"; ?>" name="page" value="<?php echo $i ?>">
+                        <?php } ?>
+                    </form>
+                    <form method="get" action="category.php">
+                        <?php if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) { ?>
+                            <input type="hidden" name="minPrice" id="minPriceData" value="<?php echo $_GET['minPrice'] ?>">
+                            <input type="hidden" name="maxPrice" id="maxPriceData" value="<?php echo $_GET['maxPrice'] ?>">
+                        <?php } ?>
+                        <input type="hidden" name="page" value="<?php echo $page < $pageNumber ? $page + 1 : $pageNumber ?>">
+                        <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&gt;">
+                    </form>
+                    <form method="get" action="category.php">
+                        <?php if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) { ?>
+                            <input type="hidden" name="minPrice" id="minPriceData" value="<?php echo $_GET['minPrice'] ?>">
+                            <input type="hidden" name="maxPrice" id="maxPriceData" value="<?php echo $_GET['maxPrice'] ?>">
+                        <?php } ?>
+                        <input type="hidden" name="page" value="<?php echo $pageNumber ?>">
+                        <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&gt;&gt;">
+                    </form>
+                </div>
 
 
             </div>

@@ -4,9 +4,11 @@ include_once './core/db/boot.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $minPrice = get_products_min_price();
+    $maxPrice = get_products_max_price();
     $price = array(
-        'minPrice' => 20,
-        'maxPrice' => 400,
+        'minPrice' => $minPrice,
+        'maxPrice' => $maxPrice,
     );
     if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) {
         $price = array(
@@ -17,9 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['removePrice'])) {
         header('location: category.php');
     }
-    $productPriceFilter = get_products_by_price($price);
-    // var_dump($productPriceFilter) . die();
 
+        // var_dump($price). die();
+
+    $productPriceFilter = get_products_by_price($price);
+        // var_dump($productPriceFilter) . die();
 
     $page = 1;
     if (isset($_GET['page'])) {
