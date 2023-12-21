@@ -13,6 +13,11 @@
     <script src="../../public/admin/js/all.js" crossorigin="anonymous"></script>
     <link href='https://fonts.googleapis.com/css?family=Jost' rel='stylesheet'>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/4.0.2/autosize.min.js"></script>
+    <script>
+        // Chọn trường nhập và áp dụng autosize
+        autosize(document.getElementById('myTextarea'));
+    </script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -43,7 +48,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Description</label>
-                                    <input type="text" name="description" class="form-control" id="exampleInputPassword1" placeholder="">
+                                    <textarea id="myTextarea" type="text" name="description" value="" class="form-control" id="exampleInputPassword1" ></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Price</label>
@@ -56,9 +61,9 @@
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Category</label>
                                     <select class="form-control" name="category_id">
-                                        <?php foreach($nameCategory as $name){?>
-                                        <option value="<?php echo $name['name']?>"><?php echo $name['name']?></option>
-                                        <?php }?>
+                                        <?php foreach ($nameCategory as $name) { ?>
+                                            <option value="<?php echo $name['name'] ?>"><?php echo $name['name'] ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
 

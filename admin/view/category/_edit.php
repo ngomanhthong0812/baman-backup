@@ -11,6 +11,11 @@
     <link rel="shortcut icon" href="../../public/img/logo/123.png" type="image/x-icon">
     <link href="../../public/admin/css/style.css" rel="stylesheet" />
     <script src="../../public/admin/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/4.0.2/autosize.min.js"></script>
+    <script>
+        // Chọn trường nhập và áp dụng autosize
+        autosize(document.getElementById('myTextarea'));
+    </script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -38,11 +43,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Image</label>
-                                    <input type="text" name="image" value="<?php echo $category['image']; ?>"  class="form-control" id="exampleInputPassword1" placeholder="">
+                                    <input type="text" name="image" value="<?php echo $category['image']; ?>" class="form-control" id="exampleInputPassword1" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Description</label>
-                                    <input type="text" name="description" value="<?php echo $category['description']; ?>"  class="form-control" id="exampleInputPassword1" placeholder="">
+                                    <textarea id="myTextarea" type="text" name="description" class="form-control" id="exampleInputPassword1" placeholder=""><?php echo $category['description']; ?></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Submit</button>
                             </form>
