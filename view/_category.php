@@ -170,7 +170,12 @@
                     </ul>
                 </nav>
                 <div class="container_title_category text-[15px] flex items-center justify-between text-[#7d7d7d]">
-                    <span class="title flex">Showing all 13 results</span>
+                    <span class="title flex items-center">Showing <?php echo isset($_GET['minPrice']) && isset($_GET['maxPrice']) ? 'all ' . count($productPriceFilter) : '1–8 of 19' ?> results <?php echo isset($_GET['minPrice']) && isset($_GET['maxPrice']) ? '&nbsp;&nbsp; 
+                    <form action="category.php" method="get">
+                    <input type="hidden" name="removePrice">
+                    <button class="bx bxs-x-circle cursor-pointer hover:font-[600]"></button> &nbsp;
+                    </form>
+                    ' . $_GET['minPrice'] . " - " . $_GET['maxPrice'] : "" ?></span>
                     <div class="flex gap-[20px]">
                         <span class="flex gap-[8px]">
                             <span>Filter</span>
@@ -226,41 +231,41 @@
                 <div class="relative container_filter-1">
                     <div class="product_card product_card1 grid-cols-2 w-[100%] filter-1 px-0 py-[2rem]">
                         <?php foreach ($productList as $product) { ?>
-                            <?php if(in_array(intval($product['price']),$productPriceFilter)){?>
-                            <a href="detail.php?product_id=<?php echo $product['id']; ?>" type="<?php echo $product['category_name'] ?>" class="my_card w-[100%] flex gap-[20px] border p-[1.2rem] rounded-[10px] shadow-sm">
-                                <div class="image w-[300px] h-[180px] border rounded-[5px]">
-                                    <img src="./public/img/product/<?php echo $product['image']; ?>.webp" alt="" class="w-[100px]">
-                                    <div class="icon"> <i class='bx bx-heart'></i><i class='bx bxs-right-arrow'></i></div>
-                                    <div class="icon"><i class='bx bx-refresh'></i><i class='bx bxs-right-arrow'></i></div>
-                                    <div class="icon" onclick="openZoomCard('<?php echo $product['id']; ?>','<?php echo $product['image']; ?>', '<?php echo $product['name']; ?>', '<?php echo $product['price']; ?>','<?php echo $product['description']; ?>', event)">
-                                        <i class='bx bx-fullscreen'></i><i class='bx bxs-right-arrow'></i>
-                                    </div>
-                                </div>
-                                <div class="w-[300px]">
-                                    <p>
-                                        <?php echo $product['name']; ?>
-                                    </p>
-                                    <div class="price">
-                                        $
-                                        <?php echo $product['price']; ?>.00
-                                    </div>
-                                    <div class="content text-[12px] mt-[10px] truncate overflow-hidden ">
-                                        <?php echo $product['description']; ?>
-                                    </div>
-                                    <div class="view w-[100%] h-[8px] relative bg-[#e6e6e6] rounded-[5px] mt-[10px]">
-                                        <div class="w-[<?php echo $product['quantity']; ?>%] h-[100%] bg-[red] rounded-l-[5px] absolute top-0 left-0">
+                            <?php if (in_array(intval($product['price']), $productPriceFilter)) { ?>
+                                <a href="detail.php?product_id=<?php echo $product['id']; ?>" type="<?php echo $product['category_name'] ?>" class="my_card w-[100%] flex gap-[20px] border p-[1.2rem] rounded-[10px] shadow-sm">
+                                    <div class="image w-[300px] h-[180px] border rounded-[5px]">
+                                        <img src="./public/img/product/<?php echo $product['image']; ?>.webp" alt="" class="w-[100px]">
+                                        <div class="icon"> <i class='bx bx-heart'></i><i class='bx bxs-right-arrow'></i></div>
+                                        <div class="icon"><i class='bx bx-refresh'></i><i class='bx bxs-right-arrow'></i></div>
+                                        <div class="icon" onclick="openZoomCard('<?php echo $product['id']; ?>','<?php echo $product['image']; ?>', '<?php echo $product['name']; ?>', '<?php echo $product['price']; ?>','<?php echo $product['description']; ?>', event)">
+                                            <i class='bx bx-fullscreen'></i><i class='bx bxs-right-arrow'></i>
                                         </div>
                                     </div>
-                                    <div class="quantity">
-                                        <div class="text-[13px] text-[#7d7d7d] mt-[10px]">Available: <b class="text-black">
-                                                <?php echo $product['quantity']; ?>
-                                            </b>
+                                    <div class="w-[300px]">
+                                        <p>
+                                            <?php echo $product['name']; ?>
+                                        </p>
+                                        <div class="price">
+                                            $
+                                            <?php echo $product['price']; ?>.00
                                         </div>
+                                        <div class="content text-[12px] mt-[10px] truncate overflow-hidden ">
+                                            <?php echo $product['description']; ?>
+                                        </div>
+                                        <div class="view w-[100%] h-[8px] relative bg-[#e6e6e6] rounded-[5px] mt-[10px]">
+                                            <div class="w-[<?php echo $product['quantity']; ?>%] h-[100%] bg-[red] rounded-l-[5px] absolute top-0 left-0">
+                                            </div>
+                                        </div>
+                                        <div class="quantity">
+                                            <div class="text-[13px] text-[#7d7d7d] mt-[10px]">Available: <b class="text-black">
+                                                    <?php echo $product['quantity']; ?>
+                                                </b>
+                                            </div>
+                                        </div>
+                                        <button class="bg-black text-white text-[13px] px-[2.5rem] py-[0.4rem] mt-[10px]">Read more</button>
                                     </div>
-                                    <button class="bg-black text-white text-[13px] px-[2.5rem] py-[0.4rem] mt-[10px]">Read more</button>
-                                </div>
-                            </a>
-                        <?php } ?>
+                                </a>
+                            <?php } ?>
                         <?php } ?>
                     </div>
                     <!-- end lọc 1 -->
@@ -268,51 +273,78 @@
                     <!-- start lọc 2,3,4 -->
                     <div class="product_card product_card2 grid-cols-2 w-[100%] filter-2 hidden px-0 py-[2rem]">
                         <?php foreach ($productList as $product) { ?>
-                            <a href="detail.php?product_id=<?php echo $product['id']; ?>" type="<?php echo $product['category_name'] ?>" class="my_card">
-                                <div class="image">
-                                    <img src="./public/img/product/<?php echo $product['image']; ?>.webp" alt="">
-                                    <div class="icon"> <i class='bx bx-heart'></i><i class='bx bxs-right-arrow'></i></div>
-                                    <div class="icon"><i class='bx bx-refresh'></i><i class='bx bxs-right-arrow'></i></div>
-                                    <div class="icon" onclick="openZoomCard('<?php echo $product['id']; ?>','<?php echo $product['image']; ?>', '<?php echo $product['name']; ?>', '<?php echo $product['price']; ?>','<?php echo $product['description']; ?>', event)">
-                                        <i class='bx bx-fullscreen'></i><i class='bx bxs-right-arrow'></i>
+                            <?php if (in_array(intval($product['price']), $productPriceFilter)) { ?>
+                                <a href="detail.php?product_id=<?php echo $product['id']; ?>" type="<?php echo $product['category_name'] ?>" class="my_card">
+                                    <div class="image">
+                                        <img src="./public/img/product/<?php echo $product['image']; ?>.webp" alt="">
+                                        <div class="icon"> <i class='bx bx-heart'></i><i class='bx bxs-right-arrow'></i></div>
+                                        <div class="icon"><i class='bx bx-refresh'></i><i class='bx bxs-right-arrow'></i></div>
+                                        <div class="icon" onclick="openZoomCard('<?php echo $product['id']; ?>','<?php echo $product['image']; ?>', '<?php echo $product['name']; ?>', '<?php echo $product['price']; ?>','<?php echo $product['description']; ?>', event)">
+                                            <i class='bx bx-fullscreen'></i><i class='bx bxs-right-arrow'></i>
+                                        </div>
+                                        <button>Read more</button>
                                     </div>
-                                    <button>Read more</button>
-                                </div>
-                                <p>
-                                    <?php echo $product['name']; ?>
-                                </p>
-                                <div class="price">$
-                                    <?php echo $product['price']; ?>.00
-                                </div>
-                            </a>
+                                    <p>
+                                        <?php echo $product['name']; ?>
+                                    </p>
+                                    <div class="price">$
+                                        <?php echo $product['price']; ?>.00
+                                    </div>
+                                </a>
+                            <?php } ?>
                         <?php } ?>
                     </div>
                 </div>
                 <!-- end lọc 2,3,4 -->
+                <!--  lấy số trang -->
 
-                <div class="page flex m-[auto] w-[fit-content] p-[0.3rem] gap-[5px] rounded-[3px] bg-black items-center justify-center text-[16px]">
-                    <form method="get" action="category.php">
-                        <input type="hidden" name="page" value="1">
-                        <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&lt;&lt;">
-                    </form>
-                    <form method="get" action="category.php">
-                        <input type="hidden" name="page" value="<?php echo $page > 1 ? $page - 1 : 1 ?>">
-                        <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&lt;">
-                    </form>
-                    <form method="get" action="category.php" class="flex gap-[5px]">
-                        <?php for ($i = 1; $i <= $pageNumber; $i++) { ?>
-                            <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center text-center cursor-pointer  duration-300 ease-in-out <?php echo $page == $i ? " bg-white text-black" : " bg-[black] text-[white] hover:bg-white hover:text-black"; ?>" name="page" value="<?php echo $i ?>">
-                        <?php } ?>
-                    </form>
-                    <form method="get" action="category.php">
-                        <input type="hidden" name="page" value="<?php echo $page < $pageNumber ? $page + 1 : $pageNumber ?>">
-                        <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&gt;">
-                    </form>
-                    <form method="get" action="category.php">
-                        <input type="hidden" name="page" value="<?php echo $pageNumber ?>">
-                        <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&gt;&gt;">
-                    </form>
-                </div>
+
+                <?php $pageNumber = intval((count($productPriceFilter) / 8) + 1); ?>
+                <?php if (count($productPriceFilter) > 7) { ?>
+                    <div class="page flex m-[auto] w-[fit-content] p-[0.3rem] gap-[5px] rounded-[3px] bg-black items-center justify-center text-[16px]">
+                        <form method="get" action="category.php">
+                            <?php if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) { ?>
+                                <input type="hidden" name="minPrice" id="minPriceData" value="<?php echo $_GET['minPrice'] ?>">
+                                <input type="hidden" name="maxPrice" id="maxPriceData" value="<?php echo $_GET['maxPrice'] ?>">
+                            <?php } ?>
+                            <input type="hidden" name="page" value="1">
+                            <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&lt;&lt;">
+                        </form>
+                        <form method="get" action="category.php">
+                            <?php if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) { ?>
+                                <input type="hidden" name="minPrice" id="minPriceData" value="<?php echo $_GET['minPrice'] ?>">
+                                <input type="hidden" name="maxPrice" id="maxPriceData" value="<?php echo $_GET['maxPrice'] ?>">
+                            <?php } ?>
+                            <input type="hidden" name="page" value="<?php echo $page > 1 ? $page - 1 : 1 ?>">
+                            <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&lt;">
+                        </form>
+                        <form method="get" action="category.php" class="flex gap-[5px]">
+                            <?php if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) { ?>
+                                <input type="hidden" name="minPrice" id="minPriceData" value="<?php echo $_GET['minPrice'] ?>">
+                                <input type="hidden" name="maxPrice" id="maxPriceData" value="<?php echo $_GET['maxPrice'] ?>">
+                            <?php } ?>
+                            <?php for ($i = 1; $i <= $pageNumber; $i++) { ?>
+                                <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center text-center cursor-pointer  duration-300 ease-in-out <?php echo $page == $i ? " bg-white text-black" : " bg-[black] text-[white] hover:bg-white hover:text-black"; ?>" name="page" value="<?php echo $i ?>">
+                            <?php } ?>
+                        </form>
+                        <form method="get" action="category.php">
+                            <?php if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) { ?>
+                                <input type="hidden" name="minPrice" id="minPriceData" value="<?php echo $_GET['minPrice'] ?>">
+                                <input type="hidden" name="maxPrice" id="maxPriceData" value="<?php echo $_GET['maxPrice'] ?>">
+                            <?php } ?>
+                            <input type="hidden" name="page" value="<?php echo $page < $pageNumber ? $page + 1 : $pageNumber ?>">
+                            <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&gt;">
+                        </form>
+                        <form method="get" action="category.php">
+                            <?php if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) { ?>
+                                <input type="hidden" name="minPrice" id="minPriceData" value="<?php echo $_GET['minPrice'] ?>">
+                                <input type="hidden" name="maxPrice" id="maxPriceData" value="<?php echo $_GET['maxPrice'] ?>">
+                            <?php } ?>
+                            <input type="hidden" name="page" value="<?php echo $pageNumber ?>">
+                            <input type="submit" class="w-[35px] h-[35px] rounded-[3px] flex items-center justify-center cursor-pointer text-[white] hover:bg-white hover:text-black duration-300 ease-in-out" value="&gt;&gt;">
+                        </form>
+                    </div>
+                <?php } ?>
 
 
             </div>
